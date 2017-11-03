@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>PDI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./js/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link href="./stylesheets/estilo.css" rel="stylesheet">
+  <script type="text/javascript" src="./js/codigo.js"></script>
+
+</head>
+
+<body>
+<div class="container">
+
+    <div class="span10">
+      <h1>Transformaciones y filtro</h1>
+      <div id="input" >
+        <form action="/upload" method="post" id="upload-form" enctype="multipart/form-data">
+          <fieldset>
+            <label>Selecciona una imagen</label>
+            <input type="file" name="image">
+            <br>
+            <button id="button"  type="submit" class="btn btn-danger">Subir</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="resultado" class="container"  style='display:none;'>
+    <h2>Resultados</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <a id="img1" href="./images/1.jpg" target="_blank">
+            <div class="caption">
+              <p>Imagen Original.</p>
+            </div>
+            <img id="img2" src="./images/1.jpg" alt="Lights" style="width:100%">
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="thumbnail">
+          <a id="img3" href="./images/4.jpg" target="_blank">
+            <div class="caption">
+              <p>Imagen procesada.</p>
+            </div>
+            <img id="img4" src="./images/4.jpg" alt="Nature" style="width:100%">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
