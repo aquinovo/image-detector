@@ -257,16 +257,15 @@ function gamma(img,height,width){
 	
 }
 
-function filtroMaxColor(img,height,width,f,c){
+/*function filtroMaxColor(img,height,width,f,c){
 	console.log("GammaColor");
 
-	var filtro=new cv.Matrix(M+2*(f-1),N+2*(c-1));
+	var filtro=new cv.Matrix(height+2*(f-1),width+2*(c-1));
 	var a = (f-1)/2;
 	var b = (c-1)/2;
-	%dimensiones del filtro
 
-	var imgA=new cv.Matrix(M+2*(f-1),N+2*(c-1));
-    imgA=insertar() 
+	var imgA=new cv.Matrix(height+2*(f-1),width+2*(c-1));
+    imgA=insertar(imgA, f , height+f-1 , c , width+c-1, img ); 
 
 
 	im1(f:M+f-1,c:N+c-1) = im;
@@ -277,6 +276,9 @@ function filtroMaxColor(img,height,width,f,c){
 		end
 		return log;
 }
+function insertar(imgA, f1 , f2 , c1 , c2, img ){
+*/
+
 function d2h(d) { 
 	var h= (+d).toString(16)+"";
 	if(h.length==1){
