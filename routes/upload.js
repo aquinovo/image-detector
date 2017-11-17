@@ -9,6 +9,7 @@ var math = require('mathjs');
 
 home=path.resolve("."); 
 /* GET home page. */
+//Funcion de prueba
 router.get('/', function(req, res) {
 	ruta = home + "/public/images/" + "citricos.jpg";
 	cv.readImage(ruta, function (err, img) {
@@ -31,7 +32,6 @@ router.get('/', function(req, res) {
 
 		for (var i = 0; i < height; i++) {
 			for (var j = 0; j < width; j++){
-				
 				mat.set(i,j, rgb );
 			}
 		}
@@ -77,7 +77,7 @@ router.post('/:filtro',multipart() ,function(req, res) {
         		var mat=gammaColor(img,height,width);
         		break;
         		case '4':
-        		var mat=filtroMaxColor(img,height,width,3,3);
+        		var mat=logInvColor(img,height,width,3,3);
         		break;
         		default:	
         		res.send("Escoger un fltro");
@@ -188,9 +188,9 @@ function logaritmoColor(img,height,width){
 
 	for (var i = 0; i < height; i++) {
 		for (var j = 0; j < width; j++){
-			var valor_r=10 * parseInt( math.log( img.pixel(i,j)[0]+1,10) );
-			var valor_g=10 * parseInt( math.log( img.pixel(i,j)[1]+1,10) );
-			var valor_b=10 * parseInt( math.log( img.pixel(i,j)[2]+1,10) );
+			var valor_r= parseInt( img.pixel(i,j) );
+			var valor_g=20 * parseInt( math.log( img.pixel(i,j)[1]+1,10) );
+			var valor_b= parseInt( img.pixel(i,j) );
 			if(valor_r>255)
 				valor_r=255;
 			if(valor_g>255)
@@ -226,9 +226,9 @@ function gammaColor(img,height,width){
 
 	for (var i = 0; i < height; i++) {
 		for (var j = 0; j < width; j++){
-			var valor_r=parseInt( Math.pow(img.pixel(i,j)[0], 1.15) );
-			var valor_g=parseInt( Math.pow(img.pixel(i,j)[1], 1.15) );
-			var valor_b=parseInt( Math.pow(img.pixel(i,j)[2], 1.15) );
+			var valor_r=img.pixel(i,j);
+			var valor_g=parseInt( Math.pow(img.pixel(i,j)[1], 0.85) );
+			var valor_b=img.pixel(i,j);
 			if(valor_r>255)
 				valor_r=255;
 			if(valor_g>255)
@@ -255,6 +255,29 @@ function gamma(img,height,width){
 	}
 	return neg;
 	
+}
+function logInvColor(img,height,width){
+	console.log("logInvColor");
+	var gamma=new cv.Matrix(height,width);
+
+	for (var i = 0; i < height; i++) {
+		for (var j = 0; j < width; j++){
+			var valor_r=parseInt(0.25 * Math.pow(2.71, img.pixel(i,j)[0]) * 0.0055);
+			var valor_g=parseInt(0.25 * Math.pow(2.71, img.pixel(i,j)[1]) * 0.0055);
+			var valor_b=parseInt(0.25 * Math.pow(2.71, img.pixel(i,j)[2]) * 0.0055);
+			if(valor_r>255)
+				valor_r=255;
+			if(valor_g>255)
+				valor_g=255;
+			if(valor_b>255)
+				valor_b=255;
+			var r=d2h(valor_r);
+			var g=d2h(valor_g);
+			var b=d2h(valor_b);
+			gamma.set(i,j,"0x"+r+g+b);
+		}
+	}
+	return gamma;
 }
 
 /*function filtroMaxColor(img,height,width,f,c){
